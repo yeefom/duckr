@@ -19,7 +19,8 @@
   "homepage": "https://github.com/yeefom/duckr#readme",
   "dependencies": {
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-router": "^2.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
