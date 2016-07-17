@@ -1,3 +1,5 @@
-# duckr
+# Duckr
 
-Another project for [ReactJS Program](http://www.reactjsprogram.com).
+Re-*dux*  + Twi-*tter* = *Ducker*
+
+A project for [ReactJS Program](http://www.reactjsprogram.com).
