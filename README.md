@@ -1,5 +1,9 @@
 # Duckr
 
-Re-*dux*  + Twi-*tter* = *Ducker*
+Simple Microblogging platform with React, Redux, and Firebase.
 
-A project for [ReactJS Program](http://www.reactjsprogram.com).
+Re-***dux***  + Twi-***tter*** = ***Ducker***
+
+---
+
+*A project for [ReactJS Program](http://www.reactjsprogram.com).*
