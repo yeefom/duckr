@@ -8,3 +8,8 @@ export default function () {
     }, 2000);
   });
 }
+
+export function checkIfAuthed(store) {
+  // TODO check with Firebase
+  return store.getState().isAuthed;
+}
