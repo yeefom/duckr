@@ -13,3 +13,7 @@ export function checkIfAuthed(store) {
   // TODO check with Firebase
   return store.getState().isAuthed;
 }
+
+export function logout() {
+  console.log('log out!!!');
+}
