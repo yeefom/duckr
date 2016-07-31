@@ -1,4 +1,5 @@
-import auth, {logout} from 'helpers/auth';
+import auth, {logout, saveUser} from 'helpers/auth';
+import {formatUserInfo} from 'helpers/utils';
 
 const AUTH_USER = 'AUTH_USER';
 const UNAUTH_USER = 'UNAUTH_USER';
@@ -6,7 +7,7 @@ const FETCHING_USER = 'FETCHING_USER';
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE';
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS';
 
-function authUser (uid) {
+export function authUser (uid) {
   return {
     type: AUTH_USER,
     uid
@@ -33,7 +34,7 @@ function fetchingUserFailure (error) {
   };
 }
 
-function fetchingUserSuccess (uid, user, timestamp) {
+export function fetchingUserSuccess (uid, user, timestamp) {
   return {
     type: FETCHING_USER_SUCCESS,
     uid,
@@ -45,10 +46,14 @@ function fetchingUserSuccess (uid, user, timestamp) {
 export function fetchAndHandleAuthedUser() {
   return function(dispatch) {
     dispatch(fetchingUser());
-    return auth().then(user => {
-      dispatch(fetchingUserSuccess(user.uid, user, Date.now()));
-      dispatch(authUser(user.uid));
-    }).catch(error => dispatch(fetchingUserFailure(error)));
+    return auth().then(({user}) => {
+      const userData = user.providerData[0];
+      const userInfo = formatUserInfo(userData.displayName, userData.photoURL, user.uid);
+      return dispatch(fetchingUserSuccess(user.uid, userInfo, Date.now()));
+    })
+    .then(({user}) => saveUser(user))
+    .then(user => dispatch(authUser(user.uid)))
+    .catch(error => dispatch(fetchingUserFailure(error)));
   };
 }
 
@@ -68,7 +73,7 @@ const initialUserState = {
   }
 };
 
-function user (state = initialUserState, action) {
+function userReducer (state = initialUserState, action) {
   switch (action.type) {
     case FETCHING_USER_SUCCESS:
       return {
@@ -124,7 +129,7 @@ export default function users (state = initialState, action) {
           ...state,
           isFetching: false,
           error: '',
-          [action.uid]: user(state[action.uid], action)
+          [action.uid]: userReducer(state[action.uid], action)
         };
     default:
       return state;
