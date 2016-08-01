@@ -6,6 +6,7 @@ const UNAUTH_USER = 'UNAUTH_USER';
 const FETCHING_USER = 'FETCHING_USER';
 const FETCHING_USER_FAILURE = 'FETCHING_USER_FAILURE';
 const FETCHING_USER_SUCCESS = 'FETCHING_USER_SUCCESS';
+const REMOVE_FETCHING_USER = 'REMOVE_FETCHING_USER';
 
 export function authUser (uid) {
   return {
@@ -43,6 +44,12 @@ export function fetchingUserSuccess (uid, user, timestamp) {
   };
 }
 
+export function removeFetchingUser() {
+  return {
+    type: REMOVE_FETCHING_USER
+  };
+}
+
 export function fetchAndHandleAuthedUser() {
   return function(dispatch) {
     dispatch(fetchingUser());
@@ -57,7 +64,7 @@ export function fetchAndHandleAuthedUser() {
   };
 }
 
-export function logoutAndUnauth () {
+export function logoutAndUnauth() {
   return function(dispatch) {
     logout();
     dispatch(unauthUser());
@@ -87,7 +94,7 @@ function userReducer (state = initialUserState, action) {
 }
 
 const initialState = {
-  isFetching: false,
+  isFetching: true,
   error: '',
   isAuthed: false,
   authedId: ''
@@ -131,6 +138,11 @@ export default function users (state = initialState, action) {
           error: '',
           [action.uid]: userReducer(state[action.uid], action)
         };
+    case REMOVE_FETCHING_USER:
+      return {
+        ...state,
+        isFetching: false
+      };
     default:
       return state;
   }
