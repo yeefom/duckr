@@ -2,7 +2,7 @@ const ADD_LISTENER = 'ADD_LISTENER';
 
 export function addListener(listenerId) {
   return {
-    ADD_LISTENER,
+    type: ADD_LISTENER,
     listenerId
   };
 }
