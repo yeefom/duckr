@@ -18,8 +18,8 @@ class DuckContainer extends Component {
   render() {
     return (
       <Duck
-        goToProfile = {() => this.goToProfile()}
-        handleClick = {this.props.hideReplyBtn ? null : () => this.handleClick()}
+        goToProfile = {e => this.goToProfile(e)}
+        handleClick = {this.props.hideReplyBtn ? null : e => this.handleClick(e)}
         {...this.props}
       />
     );

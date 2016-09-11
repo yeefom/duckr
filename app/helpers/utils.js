@@ -15,3 +15,8 @@ export function formatDuck(text, {name, avatar, uid}) {
     timestamp: Date.now()
   };
 }
+
+export function formatTimestamp(time) {
+  const date = new Date(time);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+}
