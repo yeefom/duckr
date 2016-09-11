@@ -37,7 +37,7 @@ function Feed(props) {
             ? <p className={header}>{'No ducks available'}</p>
             : null
         }
-        { props.duckIds.map(id => <DuckContainer key={id}/>) }
+        { props.duckIds.map(id => <DuckContainer key={id} duckId={id}/>) }
         {
           props.error
             ? <p className={errorMsg}>{props.error}</p>
