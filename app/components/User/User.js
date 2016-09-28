@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import {errorMsg} from 'shared/Styles/styles.css';
+import {errorMsg} from 'sharedStyles/styles.css';
 import {userContainer, header} from './styles.css';
-import {DuckContainer} from 'containers/DuckContainer';
+import {DuckContainer} from 'containers';
 
 User.propTypes = {
   noUser: PropTypes.bool.isRequired,
@@ -22,10 +22,10 @@ export default function User(props) {
                 <div className={userContainer}>{props.name}</div>
                 {props.duckIds.map(id => <DuckContainer key={id} duckId={id}/>)}
                 {props.duckIds.length
-                  ? <p className={header}>
+                  ? null
+                  : <p className={header}>
                       {`${props.name.split(' ')[0]} hasn't ducked yet.`}
                     </p>
-                  : null
                 }
               </div>
           }
