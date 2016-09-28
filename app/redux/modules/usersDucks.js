@@ -40,7 +40,6 @@ export function addSingleUsersDuck(uid, duckId) {
 
 export function fetchAndHandleUsersDucks(uid) {
   return function (dispatch) {
-    debugger
     dispatch(fetchingUsersDucks());
     return fetchUsersDucks(uid)
       .then(ducks => dispatch(addMultipleDucks(ducks)))

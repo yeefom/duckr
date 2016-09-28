@@ -8,16 +8,13 @@ import {staleUser, staleDucks} from 'helpers/utils';
 
 class UserContainer extends Component {
   componentDidMount() {
-    debugger
     const uid = this.props.routeParams.uid;
 
     if (this.props.noUser || staleUser(this.props.lastUpdatedUser)) {
-      debugger
       this.props.fetchAndHandleUser(uid);
     }
 
     if (this.props.duckIds || staleDucks(this.props.lastUpdatedDucks)) {
-      debugger
       this.props.fetchAndHandleUsersDucks(uid);
     }
   }
@@ -45,7 +42,6 @@ UserContainer.propTypes = {
 };
 
 function mapStateToProps({users, usersDucks}, props) {
-  debugger
   const uid = props.routeParams.uid;
   const user = users[uid];
   const ducks = usersDucks[uid];

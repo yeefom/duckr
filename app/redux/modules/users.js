@@ -74,7 +74,6 @@ export function logoutAndUnauth() {
 
 export function fetchAndHandleUser(uid) {
   return function (dispatch) {
-    debugger
     dispatch(fetchingUser());
     return fetchUser(uid)
       .then(user => dispatch(fetchingUserSuccess(uid, user, Date.now())))
