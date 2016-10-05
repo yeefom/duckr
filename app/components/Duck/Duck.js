@@ -16,7 +16,7 @@ Duck.propTypes = {
     timestamp: PropTypes.number.isRequired,
     uid: PropTypes.string.isRequired
   }),
-  handleClick: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   isLiked: PropTypes.bool.isRequired,
   addAndHandleLike: PropTypes.func.isRequired,
   handleDeleteLike: PropTypes.func.isRequired,
