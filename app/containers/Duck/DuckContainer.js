@@ -52,7 +52,7 @@ function mapStateToProps({ducks, likeCount, usersLikes}, props) {
     duck: ducks[duckId],
     numberOfLikes: likeCount[duckId],
     isLiked: usersLikes[duckId] === true,
-    hideLikeCount: props.hideReplyBtn,
+    hideLikeCount: props.hideLikeCount,
     hideReplyBtn: props.hideReplyBtn
   };
 }
