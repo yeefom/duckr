@@ -1,8 +1,20 @@
 import React, {Component, PropTypes} from 'react';
 import {DuckDetails} from 'components';
-import {connect} from 'redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as duckActionCreators from 'redux/modules/ducks';
+import * as likeCountActionCreators from 'redux/modules/likeCount';
 
 class DuckDetailsContainer extends Component {
+  componentDidMount() {
+    this.props.initLikeFetch(this.props.duckId);
+
+    if (this.props.duckFetched) {
+      this.props.removeFetching();
+    } else {
+      this.props.fetchAndHandleDuck();
+    }
+  }
   render() {
     return (
       <DuckDetails
@@ -19,16 +31,24 @@ DuckDetailsContainer.propTypes = {
   authedUser: PropTypes.object.isRequired,
   duckId: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired
+  error: PropTypes.string.isRequired,
+  duckFetched: PropTypes.bool.isRequired
 };
 
 function mapStateToProps({ducks, likeCount, users}, props) {
+  const duckId = props.routeParams.duckId;
+
   return {
     isFetching: ducks.isFetching || likeCount.isFetching,
     error: ducks.error,
     authedUser: users[users.authedId].info,
-    duckId: props.routeParams.duckId
+    duckId,
+    duckFetched: !!ducks[duckId]
   };
 }
 
-export default connect(mapStateToProps)(DuckDetailsContainer);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({...duckActionCreators, ...likeCountActionCreators}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DuckDetailsContainer);
