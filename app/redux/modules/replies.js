@@ -109,7 +109,6 @@ const initialDuckState = {
 function repliesAndLastUpated(state = initialDuckState, action) {
   switch (action.type) {
     case FETCHING_REPLIES_SUCCESS :
-      debugger
       return {
         ...state,
         lastUpdated: action.lastUpdated,

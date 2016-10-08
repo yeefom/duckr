@@ -29,7 +29,7 @@ Replies.propTypes = {
 
 export default function Replies({isFetching, error, replies}) {
   const replyIds = Object.keys(replies);
-  debugger
+
   return (
     <div>
       {error ? <h3 className={errorMsg}>{error}</h3> : null}

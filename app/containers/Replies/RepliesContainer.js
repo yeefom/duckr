@@ -3,10 +3,13 @@ import {connect} from 'react-redux';
 import {Replies} from 'components';
 import {bindActionCreators} from 'redux';
 import * as repliesActionCreators from 'redux/modules/replies';
+import {staleReplies} from 'helpers/utils';
 
 class RepliesContainer extends Component {
   componentDidMount() {
-    this.props.fetchAndHandleReplies(this.props.duckId);
+    if (staleReplies(this.props.lastUpdated)) {
+      this.props.fetchAndHandleReplies(this.props.duckId);
+    }
   }
   render() {
     return (
