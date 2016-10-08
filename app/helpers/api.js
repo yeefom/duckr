@@ -81,7 +81,7 @@ export function postReply(duckId, reply) {
     ...reply,
     replyId
   };
-  const replyPromise = ref.child(`replies/${duckId}`).set(replyWithId);
+  const replyPromise = ref.child(`replies/${duckId}/${replyId}`).set(replyWithId);
 
   return {
     replyWithId,
@@ -89,3 +89,6 @@ export function postReply(duckId, reply) {
   };
 }
 
+export function fetchReplies(duckId) {
+  return ref.child(`replies/${duckId}`).once('value').then(snapshot => snapshot.val() || {});
+}

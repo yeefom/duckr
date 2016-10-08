@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {DuckContainer} from 'containers';
+import {DuckContainer, RepliesContainer} from 'containers';
 import {mainContainer, container, content, repliesContainer,
   replyTextAreaContainer, replyTextArea} from './styles.css';
 import {subHeader, darkBtn, errorMsg} from 'sharedStyles/styles.css';
@@ -55,7 +55,9 @@ export default function DuckDetails({duckId, isFetching, authedUser, error, addA
               <Reply submit={submit}/>
             </div>
             <div className={repliesContainer}>
-              {'REPLIES'}
+              <RepliesContainer
+                duckId={duckId}
+              />
             </div>
           </div>
       }

@@ -1,4 +1,4 @@
-import {postReply} from 'helpers/api';
+import {postReply, fetchReplies} from 'helpers/api';
 
 const FETCHING_REPLIES = 'FETCHING_REPLIES';
 const FETCHING_REPLIES_ERROR = 'FETCHING_REPLIES_ERROR';
@@ -65,6 +65,16 @@ export function addAndHandleReply(duckId, reply) {
   };
 }
 
+export function fetchAndHandleReplies(duckId) {
+  return function (dispatch) {
+    dispatch(fetchingReplies());
+    fetchReplies(duckId)
+      .then(replies => dispatch(fetchingRepliesSuccess(duckId, replies)))
+      .catch(err => dispatch(fetchingRepliesError(err)));
+  };
+}
+
+
 const initialReply = {
   name: '',
   reply: '',
@@ -99,6 +109,7 @@ const initialDuckState = {
 function repliesAndLastUpated(state = initialDuckState, action) {
   switch (action.type) {
     case FETCHING_REPLIES_SUCCESS :
+      debugger
       return {
         ...state,
         lastUpdated: action.lastUpdated,
