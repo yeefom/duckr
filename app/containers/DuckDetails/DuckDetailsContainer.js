@@ -42,11 +42,11 @@ function mapStateToProps({ducks, likeCount, users}, props) {
   const duckId = props.routeParams.duckId;
 
   return {
-    isFetching: ducks.isFetching || likeCount.isFetching,
-    error: ducks.error,
+    isFetching: ducks.get('isFetching') || likeCount.isFetching,
+    error: ducks.get('error'),
     authedUser: users[users.authedId].info,
     duckId,
-    duckFetched: !!ducks[duckId]
+    duckFetched: !!ducks.get(duckId)
   };
 }
 

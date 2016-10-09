@@ -9,11 +9,11 @@ const {object, number, bool, func} = PropTypes;
 class DuckContainer extends Component {
   goToProfile(e) {
     e.stopPropagation();
-    this.context.router.push('/' + this.props.duck.uid);
+    this.context.router.push('/' + this.props.duck.get('uid'));
   }
   handleClick(e) {
     e.stopPropagation();
-    this.context.router.push('/duckDetail/' + this.props.duck.duckId);
+    this.context.router.push('/duckDetail/' + this.props.duck.get('duckId'));
   }
   render() {
     return (
@@ -49,7 +49,7 @@ function mapStateToProps({ducks, likeCount, usersLikes}, props) {
   const duckId = props.duckId;
 
   return {
-    duck: ducks[duckId],
+    duck: ducks.get(duckId),
     numberOfLikes: likeCount[duckId],
     isLiked: usersLikes[duckId] === true,
     hideLikeCount: props.hideLikeCount,
